@@ -22,11 +22,6 @@ class MicropostsController < ApplicationController
 
   private
 
-  def set_task
-    @micropost = current_user.microposts.build
-    @microposts = current_user.feed_microposts.order('created_at DESC').page(params[:page])
-  end
-
   def micropost_params
     params.require(:micropost).permit(:content, :status)
   end
