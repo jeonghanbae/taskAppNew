@@ -1,0 +1,26 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <%= form_for(@micropost) do |f| %>
+        <div class="form-group">
+          <p>■タイトル
+          <%= f.text_area :content, class: 'form-control', rows: 1 %></p>
+           <p>■ステータス
+          <%= f.text_area :status, class: 'form-control', rows: 1 %></p>
+          <p>※10文字以内に収めてください(空文字なし)</p>
+        </div>
+        <%= f.submit '新規タスクを追加', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </aside>
+    <div class="col-xs-8">
+      <%= render 'microposts/microposts', microposts: @microposts %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the TaskApp</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
