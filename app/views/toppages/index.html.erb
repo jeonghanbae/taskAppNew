@@ -5,11 +5,19 @@
         <div class="form-group">
           <p>■タイトル
           <%= f.text_area :content, class: 'form-control', rows: 1 %></p>
-           <p>■ステータス
-          <%= f.text_area :status, class: 'form-control', rows: 1 %></p>
-          <p>※10文字以内に収めてください(空文字なし)</p>
+           <p>■内容
+          <%= f.text_area :status, class: 'form-control', rows: 5 %></p>
+          <span class="picture">
+              <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+          </span>
+          <p>※タイトルは10文字以内に収めてください(空文字なし)</p>
+          <p>※内容は255以内に収めてください(空文字なし)</p>
+          <p>※画像サイズはなるべく小さくしましょう。</br>※(300*300、5MB以下ちょうどいい)</p>
+          <p>※どんな画像も正方形に出力されるので加工してから投稿しましょう</p>
+          <p>※上記の項目はアップデートで修正される可能性があります</p>
+          
         </div>
-        <%= f.submit '新規タスクを追加', class: 'btn btn-primary btn-block' %>
+        <%= f.submit '新規投稿', class: 'btn btn-primary btn-block' %>
       <% end %>
     </aside>
     <div class="col-xs-8">
@@ -19,8 +27,9 @@
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">
-      <h1>Welcome to the TaskApp</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+      <h1>Welcome to the GameDraft</h1>
+      <h4>このサイトはゲームの草案を投稿し評価を楽しむ気軽なサイトです</h4>
+      <%= link_to 'いますぐ新規登録!', signup_path, class: 'btn btn-lg btn-primary' %>
     </div>
   </div>
 <% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :commetms
   root to: 'toppages#index'
 
   get 'login', to: 'sessions#new'
@@ -16,8 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :microposts, only: [:create, :destroy ,:updata]
-
+  resources :microposts , only: [:show, :create, :destroy ] do
+        resources :comments
+  end
   resources :relationships, only: [:create, :destroy]
   
 

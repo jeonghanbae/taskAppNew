@@ -4,26 +4,36 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    
     if @micropost.save
-      flash[:success] = 'Taskを投稿しました。'
+      flash[:success] = '草案を投稿しました。'
       redirect_to root_url
     else
       @microposts = current_user.feed_microposts.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = 'Taskの投稿に失敗しました。'
+      flash.now[:danger] = '草案の投稿に失敗しました。'
       render 'toppages/index'
     end
+  end
+
+  def show
+     @micropost = Micropost.find(params[:id])
+  end
+  
+  def edit
+      @micropost = current_user.microposts.build(micropost_params)
   end
   
   def destroy
     @micropost.destroy
-    flash[:success] = 'Taskを削除しました。'
+    flash[:success] = '草案を削除しました。'
     redirect_back(fallback_location: root_path)
   end
+  
 
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :status)
+    params.require(:micropost).permit(:content, :status, :picture)
   end
 
   def correct_user

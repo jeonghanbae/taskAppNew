@@ -9,16 +9,29 @@
           <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
         </div>
         <div>
-          <p>タイトル:<%= micropost.content %></p>
-          <p>ステータス:<%= micropost.status %></p>
+          <p>＠<%= micropost.content %></p>
+          <p>内容:<%= micropost.status %></p>
+          <p><%= image_tag micropost.picture.url, options = { size: 400 } if micropost.picture? %></p>
         </div>
+         
         <div>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
         </div>
+        
       </div>
     </li>
   <% end %>
   <%= paginate microposts %>
 </ul>
+
+
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
